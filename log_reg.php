@@ -46,7 +46,8 @@ function process_login ()
 					$userdata = {};
 					$userdata['alias'] = $found_username;
 					$_SESSION['userdata'] = $userdata;
-					header("location:./profile/");  // go to other controller here
+					header("Location: ./profile/");  // go to other controller here
+					exit();
 				}
 			}
 		}
