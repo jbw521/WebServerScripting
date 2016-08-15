@@ -3,6 +3,12 @@
 	include_once("./log_reg.php");
 	session_start();
 	
+	if(isset($_SESSION['userdata']))
+	{
+		header('Location: ./profile/');
+		exit();
+	}
+	
 	$action = filter_input(INPUT_POST, 'action');
 	if($action === null)
 	{
