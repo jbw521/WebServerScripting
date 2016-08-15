@@ -1,6 +1,12 @@
 <?php
 	include_once("../database.php");
 	
+	if(!isset($_SESSION['userdata']))
+	{
+		header('Location: ../');
+		exit();
+	}
+	
 	$action = filter_input(INPUT_POST, 'action');
 	if($action === null)
 	{
