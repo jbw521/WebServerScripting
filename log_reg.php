@@ -33,8 +33,9 @@ function process_login ()
 			else
 			{
 				$found_username = $user['alias'];
-				$found_password = $user['password'];
-				if($found_password != $password) // password doesn't match
+				$found_password_hash = $user['password'];
+				
+				if(!password_verify($password, $found_password_hash)) // password doesn't match
 				{
 					$error_message = "Invalid Password.";
 					$_POST['action'] = 'login-page';					
