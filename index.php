@@ -1,11 +1,10 @@
 <?php
-	include_once("./database.php");
-	include_once("./log_reg.php");
+	include_once("../database.php");
 	session_start();
-	
-	if(isset($_SESSION['userdata']))
+
+	if(!isset($_SESSION['userdata']))
 	{
-		header('Location: ./profile/');
+		header('Location: /website_1/index.php');
 		exit();
 	}
 	
@@ -15,23 +14,21 @@
 		$action = filter_input(INPUT_GET, 'action');
 		if($action === null)
 		{
-			$action = 'login-page';
+			$action = 'profile';
 		}
 	}
 	
 	switch($action)
 	{
-		case 'login-page';
-			include('./login.php');
+		case 'feed';
+			include('./feed_view.php');
 			break;
-		case 'login';
-			process_login();
+		case 'update';
+			include('./update_view.php');
 			break;
-		case 'reg':
-			include('./register.php');
-			break;
-		case 'subreg':
-			register_user();
+		case 'profile':
+		default:
+			include('./profile_view.php');
 			break;
 	}
 ?>
