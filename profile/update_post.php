@@ -24,10 +24,12 @@ function confirm_update()
 	
 	if(!empty($error_message))
 	{
-		include('update_profile.php');
+		include('update_view.php');
 		exit();
 	}
 	
 	update_user($user_name, $password, $first_name, $last_name, $email_address);
+	
+	include('update_confirmation.php');
 }
 ?>

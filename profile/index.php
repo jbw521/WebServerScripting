@@ -1,10 +1,11 @@
 <?php
 	include_once("../database.php");
+	include_once("update_post.php");
 	session_start();
-
+	
 	if(!isset($_SESSION['userdata']))
 	{
-		header('Location: /website_1/index.php');
+		header('Location: ../');
 		exit();
 	}
 	
@@ -20,11 +21,14 @@
 	
 	switch($action)
 	{
-		case 'feed';
+		case 'feed':
 			include('./feed_view.php');
 			break;
-		case 'update';
+		case 'update':
 			include('./update_view.php');
+			break;
+		case 'update_profile':
+			confirm_update();
 			break;
 		case 'profile':
 		default:
