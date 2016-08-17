@@ -33,9 +33,8 @@ function process_login ()
 			else
 			{
 				$found_username = $user['alias'];
-				$found_password_hash = $user['password'];
-				
-				if(!password_verify($password, $found_password_hash)) // password doesn't match
+				$found_password = $user['password'];
+				if($found_password != $password) // password doesn't match
 				{
 					$error_message = "Invalid Password.";
 					$_POST['action'] = 'login-page';					
@@ -44,8 +43,11 @@ function process_login ()
 				}
 				else // login successful
 				{
-					$userdata = [];
+					$userdata = array();
 					$userdata['alias'] = $found_username;
+					$userdata['fname'] = $user['fname'];
+					$userdata['lname'] = $user['lname'];
+					$userdata['profilepic'] = $user['profilepic'];
 					$_SESSION['userdata'] = $userdata;
 					header("Location: ./profile/");  // go to other controller here
 					exit();
