@@ -1,9 +1,7 @@
 <?php
-
 $dsn = 'mysql:host=localhost;dbname=stickman3db';
     $username = 'root';
     $password = '';  // be sure to change this info based on where you're running the website
-
     try {
         $db= new PDO($dsn, $username, $password);
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -15,7 +13,7 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
     
     function get_username($username){
         global $db;
-        $query = 'Select alias,password from user where alias=:username_placeholder';
+        $query = 'Select alias,password,fname,lname,profilepic from user where alias=:username_placeholder';
                                           
             //prepare the query, bind the values, then you execute
                 $statement = $db->prepare($query);
@@ -33,7 +31,6 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
                     return $results;
                 }
     }
-
     
     function get_password($username){
         global $db;
@@ -115,7 +112,6 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
                 
                 return $didit;
     }
-
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
