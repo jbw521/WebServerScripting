@@ -1,3 +1,4 @@
 <?php include('../bin/logged_top.php'); ?>
-	<h4>Profile of XXXXXXX</h4>
+	<img src="../img/user/<?php echo $_SESSION['userdata']['profilepic'] ?>" alt="userpic" height="64" width="64">
+	<h4>Profile of <?php print($_SESSION['userdata']['fname'] . ' ' . $_SESSION['userdata']['lname']); ?></h4>
 <?php include('../bin/master_bottom.php'); ?>
