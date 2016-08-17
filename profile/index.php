@@ -1,9 +1,10 @@
 <?php
 	include_once("../database.php");
-	
+	session_start();
+
 	if(!isset($_SESSION['userdata']))
 	{
-		header('Location: ../');
+		header('Location: /website_1/index.php');
 		exit();
 	}
 	
