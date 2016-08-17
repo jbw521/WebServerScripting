@@ -44,7 +44,7 @@ function process_login ()
 				}
 				else // login successful
 				{
-					$userdata = {};
+					$userdata = [];
 					$userdata['alias'] = $found_username;
 					$_SESSION['userdata'] = $userdata;
 					header("Location: ./profile/");  // go to other controller here
