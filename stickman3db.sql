@@ -31,7 +31,7 @@ CREATE TABLE `comment` (
   `postid` varchar(255) NOT NULL,
   `comment` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+ 
 -- --------------------------------------------------------
 
 --
