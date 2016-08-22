@@ -48,6 +48,7 @@ function process_login ()
 					$userdata['fname'] = $user['fname'];
 					$userdata['lname'] = $user['lname'];
 					$userdata['profilepic'] = $user['profilepic'];
+					$userdata['email'] = $user['email'];
 					$_SESSION['userdata'] = $userdata;
 					header("Location: ./profile/");  // go to other controller here
 					exit();
