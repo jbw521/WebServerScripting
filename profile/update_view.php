@@ -1,6 +1,6 @@
 <?php include('../bin/logged_top.php'); ?>
 			<div id='loginForm'>
-            <form action='update_confirmation.php' method='post'>
+            <form action='index.php?action=update_profile' method='post'>
 			
 				<?php if( !empty($error_message)) { ?>
                     <p class="error"><?php echo $error_message ?></p><br>
