@@ -13,7 +13,7 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
     
     function get_username($username){
         global $db;
-        $query = 'Select alias,password,fname,lname,profilepic from user where alias=:username_placeholder';
+        $query = 'Select alias,password,fname,lname,profilepic,email from user where alias=:username_placeholder';
                                           
             //prepare the query, bind the values, then you execute
                 $statement = $db->prepare($query);
