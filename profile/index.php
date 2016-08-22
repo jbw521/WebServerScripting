@@ -21,6 +21,10 @@
 	
 	switch($action)
 	{
+		case 'logout':
+			session_destroy();
+			header("Location: /");
+			break;
 		case 'feed':
 			include('./feed_view.php');
 			break;
