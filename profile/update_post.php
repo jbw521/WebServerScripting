@@ -28,7 +28,9 @@ function confirm_update()
 		exit();
 	}
 	
-	update_user($user_name, $password, $first_name, $last_name, $email_address);
+	
+	
+	update_user($user_name, $password, $first_name, $last_name, $email_address, "user_blank.png");
 	
 	include('update_confirmation.php');
 }

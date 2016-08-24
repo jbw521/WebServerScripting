@@ -1,11 +1,12 @@
 <?php
 	include_once("../database.php");
-	include_once("update_post.php");
+	include_once('./update_post.php');
 	session_start();
+	
 	
 	if(!isset($_SESSION['userdata']))
 	{
-		header('Location: ../');
+		header('Location: /~stickman3/');
 		exit();
 	}
 	
