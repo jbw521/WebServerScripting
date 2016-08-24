@@ -1,7 +1,7 @@
 <?php include('../bin/logged_top.php'); ?>
 			<div id='loginForm'>
             <form action='index.php?action=update_profile' method='post'>
-				<label>Update Info For: <?php echo $_SESSION['userdata']['alias']; ?></label></br>
+				<label>Update Info For: <strong></strong><?php echo $_SESSION['userdata']['alias']; ?></strong></label></br>
 				<?php if( !empty($error_message)) { ?>
                     <p class="error"><?php echo $error_message ?></p><br>
                 <?php } ?>
