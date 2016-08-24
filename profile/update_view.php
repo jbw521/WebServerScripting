@@ -22,7 +22,9 @@
                 <input type='password' name='password'><br> 
 
 				<label>Confirm Password:</label>
-                <input type='password' name='confirmpassword'><br> 				
+                <input type='password' name='confirmpassword'><br>
+				<label>Profile Picture:</label>
+				<input type="file" name="img" accept="image/*"></br>
             </div>
 			<input type="hidden" name="action" value="update_profile" />
             <div id='buttons'>
