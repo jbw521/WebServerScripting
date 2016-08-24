@@ -9,11 +9,11 @@
 		<header><h2>FakeBook</h2></header>
 		<nav>
 			<ul>
-				<li><a href="./update_view.php">Update Profile</a></li>
-				<li><a href="./newsfeed.php">News Feed</a></li>
-				<li><input type="submit" value="Log Out" id="btnlogout"/></li>
+				<li><a href="./?action=profile">My Profile</a></li>
+				<li><a href="./?action=update">Update Profile</a></li>
+				<li><a href="./?action=feed">News Feed</a></li>
+				<li><a href="./?action=logout">Log out</a></li>
 			<ul>
-			
 		</nav>
 		<main>
-		
+				
