@@ -27,8 +27,8 @@
 		case 'login';
 			process_login();
 			break;
-		case 'reg':
-			include('./register.php');
+		case 'register':
+                    register_user();
 			break;
 		case 'subreg':
 			register_user();

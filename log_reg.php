@@ -48,7 +48,7 @@ function process_login ()
 					$userdata['fname'] = $user['fname'];
 					$userdata['lname'] = $user['lname'];
 					$userdata['profilepic'] = $user['profilepic'];
-					$userdata['email'] = $user['email'];
+                                        $userdata['email'] = $user['email'];
 					$_SESSION['userdata'] = $userdata;
 					header("Location: ./profile/");  // go to other controller here
 					exit();
@@ -58,9 +58,7 @@ function process_login ()
 	}
 	
 	function register_user() 
-	{
-		include("./database.php");
-	
+	{	
 		$error_message = '';
 		
 		$first_name = filter_input(INPUT_POST, 'firstname');
@@ -76,25 +74,62 @@ function process_login ()
 		{
 			$error_message = 'Must enter a valid first name.';
 		}
+                else if (!(preg_match('/^[a-zA-Z]/', $first_name) === 1)) // DOESN'T WORK
+                {
+                    $error_message = 'First name must start with a letter.';
+                }
 		else if($last_name === false || $last_name === '')
 		{
 			$error_message = 'Must enter a valid last name.';
 		}
+                else if (!(preg_match('/^[a-zA-Z]/', $last_name) === 1))
+                {
+                    $error_message = 'Last name must start with a letter.';
+                }
 		else if($user_name === false || $user_name === '')
 		{
 			$error_message = 'Must enter a valid username.';
 		}
-		else if(get_username($user_name) != false){
+                else if (!(preg_match('/^[a-zA-Z]{4,20}$/', $user_name) === 1))
+                {
+                    $error_message = 'Alias must start with a letter and be between 4 and 20 characters.';
+                }
+		else if(get_username($user_name) != false)
+                {
 			$error_message = 'That username is taken. Please enter another one.';
 		}
+                else if($email_address === false || $email_address === '')
+		{
+			$error_message = 'Must enter a valid email address.';
+		}
+                else if (!(preg_match('/[a-zA-Z0-9_.+]+@[a-zA-Z0-9-]+.[a-zA-Z]+/', $email_address) === 1)) // Source : http://stackoverflow.com/questions/12026842/how-to-validate-an-email-address-in-php
+                {
+                    $error_message = 'Must enter a valid email address.';
+                }
+                else if (!(preg_match('/^[a-zA-Z]/', $email_address) === 1))
+                {
+                    $error_message = 'Email address must start with a letter.';
+                }
 		else if($password === false || $password === '')
 		{
 			$error_message = 'Must enter a valid password.';
 		}
-		else if($email_address === false || $email_address === '')
-		{
-			$error_message = 'Must enter a valid email address.';
-		}
+                else if(!(preg_match('/[\S]{10,}[\s]{0}/', $password) === 1))
+                {
+                    $error_message = 'Must enter at least 10 non-whitespace characters for the password';
+                }
+                else if(!(preg_match('/[a-zA-Z]+/', $password) === 1))
+                {
+                    $error_message = 'Must have at least one letter';
+                }
+                else if(!(preg_match('/\W+/', $password) === 1))
+                {
+                    $error_message = 'Must enter at least 1 non-word character';
+                }
+                else if(!(preg_match('/\d+/', $password) === 1))
+                {
+                    $error_message = 'Must enter at least 1 number';
+                }
 		else 
 		{
 			if(!($password === $confirm_password))
