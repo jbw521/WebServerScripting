@@ -1,11 +1,12 @@
 <?php
-	include_once("./database.php");
-	include_once("./log_reg.php");
+	include_once("../database.php");
+	include_once('./update_post.php');
 	session_start();
 	
-	if(isset($_SESSION['userdata']))
+	
+	if(!isset($_SESSION['userdata']))
 	{
-		header('Location: /profile/index.php');
+		header('Location: /~stickman3/');
 		exit();
 	}
 	
@@ -15,23 +16,28 @@
 		$action = filter_input(INPUT_GET, 'action');
 		if($action === null)
 		{
-			$action = 'login-page';
+			$action = 'profile';
 		}
 	}
 	
 	switch($action)
 	{
-		case 'login-page';
-			include('./login.php');
+		case 'logout':
+			session_destroy();
+			header("Location: /");
 			break;
-		case 'login';
-			process_login();
+		case 'feed':
+			include('./feed_view.php');
 			break;
-		case 'register':
-                    register_user();
+		case 'update':
+			include('./update_view.php');
 			break;
-		case 'subreg':
-			register_user();
+		case 'update_profile':
+			confirm_update();
+			break;
+		case 'profile':
+		default:
+			include('./profile_view.php');
 			break;
 	}
 ?>

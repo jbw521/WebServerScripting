@@ -1,10 +1,10 @@
 <?php
 $dsn = 'mysql:host=localhost;dbname=stickman3db';
-    $username = 'root';
-    $password = '';  // be sure to change this info based on where you're running the website
-    //$username = 'stickman3';
-    //$password = 'limenewprocessingbigharmfuloctave';
-    try {
+    //$username = 'root';
+    //$password = '';  // be sure to change this info based on where you're running the website
+    $username = 'stickman3';
+    $password = 'limenewprocessingbigharmfuloctave';
+	try {
         $db= new PDO($dsn, $username, $password);
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
