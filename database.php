@@ -81,7 +81,7 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
         global $db;
         $query = 'update user'
                 . ' set password=:password_placeholder, fname=:firstname_placeholder, lname=:lastname_placeholder, email=:email_placeholder, profilepic=:profilepic_placeholder'
-                . ' where alias=username_placeholder;';
+                . ' where alias=:username_placeholder;';
                                           
             //prepare the query, bind the values, then you execute
                 $statement = $db->prepare($query);
