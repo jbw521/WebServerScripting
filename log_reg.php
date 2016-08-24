@@ -90,26 +90,26 @@ function process_login ()
 		{
 			$error_message = 'Must enter a valid username.';
 		}
-                else if (!(preg_match('/^[a-zA-Z]{4,20}$/', $user_name) === 1))
-                {
-                    $error_message = 'Alias must start with a letter and be between 4 and 20 characters.';
-                }
+		else if (!(preg_match('/^[a-zA-Z]{4,20}$/', $user_name) === 1))
+		{
+			$error_message = 'Alias must start with a letter and be between 4 and 20 characters.';
+		}
 		else if(get_username($user_name) != false)
-                {
+		{
 			$error_message = 'That username is taken. Please enter another one.';
 		}
-                else if($email_address === false || $email_address === '')
+		else if($email_address === false || $email_address === '')
 		{
 			$error_message = 'Must enter a valid email address.';
 		}
-                else if (!(preg_match('/[a-zA-Z0-9_.+]+@[a-zA-Z0-9-]+.[a-zA-Z]+/', $email_address) === 1)) // Source : http://stackoverflow.com/questions/12026842/how-to-validate-an-email-address-in-php
-                {
-                    $error_message = 'Must enter a valid email address.';
-                }
-                else if (!(preg_match('/^[a-zA-Z]/', $email_address) === 1))
-                {
-                    $error_message = 'Email address must start with a letter.';
-                }
+		else if (!(preg_match('/[a-zA-Z0-9_.+]+@[a-zA-Z0-9-]+.[a-zA-Z]+/', $email_address) === 1)) // Source : http://stackoverflow.com/questions/12026842/how-to-validate-an-email-address-in-php
+		{
+			$error_message = 'Must enter a valid email address.';
+		}
+		else if (!(preg_match('/^[a-zA-Z]/', $email_address) === 1))
+		{
+			$error_message = 'Email address must start with a letter.';
+		}
 		else if($password === false || $password === '')
 		{
 			$error_message = 'Must enter a valid password.';
@@ -162,6 +162,20 @@ function process_login ()
 		$message = wordwrap($message, 70, "\r\n");
 
 		mail($email_address, 'Fakebook Registration', $message, "MIME-Version: 1.0\r\nContent-type:text/html:charset=UTF-8");
+		include('confirmation.php');
+		
+		$user = get_username($user_name);
+		
+		$userdata = array();
+		$userdata['alias'] = $user_name;
+		$userdata['fname'] = $user['fname'];
+		$userdata['lname'] = $user['lname'];
+		$userdata['profilepic'] = $user['profilepic'];
+		$userdata['email'] = $user['email'];
+		$_SESSION['userdata'] = $userdata;
+		
+		header("Refresh:10; url=http://localhost/website_1/profile/", true, 303);  // go to other controller here. source: http://stackoverflow.com/questions/11299006/header-location-delay
+					
 	}
 	
 	
