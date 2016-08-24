@@ -5,7 +5,7 @@
 	
 	if(isset($_SESSION['userdata']))
 	{
-		header('Location: /website_1/profile/index.php');
+		header('Location: /profile/index.php');
 		exit();
 	}
 	
