@@ -1,7 +1,7 @@
 <?php include('../bin/logged_top.php'); ?>
 			<div id='loginForm'>
             <form action='index.php?action=update_profile' method='post'>
-			
+				<label>Update Info For: <?php echo $_SESSION['userdata']['alias']; ?></label>
 				<?php if( !empty($error_message)) { ?>
                     <p class="error"><?php echo $error_message ?></p><br>
                 <?php } ?>
@@ -11,9 +11,6 @@
                 
                 <label>Last Name:</label>
                 <input type='text' name='lastname' value="<?php echo $_SESSION['userdata']['lname']; ?>"><br>
-				
-				<label>UserName:</label>
-                <input type='text' name='username' value="<?php echo $_SESSION['userdata']['alias']; ?>"><br>
                 
                 <label>Email Address:</label>
                 <input type='email' name='emailaddress' value="<?php echo $_SESSION['userdata']['email']; ?>"><br>
