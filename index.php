@@ -5,7 +5,7 @@
 	
 	if(isset($_SESSION['userdata']))
 	{
-		header('Location: /profile/index.php');
+		header('Location: ./profile/');
 		exit();
 	}
 	
@@ -27,10 +27,10 @@
 		case 'login';
 			process_login();
 			break;
-		case 'register':
-                    register_user();
+		case 'reg':
+			include('./register.php');
 			break;
-		case 'subreg':
+		case 'register':
 			register_user();
 			break;
 	}

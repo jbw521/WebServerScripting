@@ -33,8 +33,9 @@ function process_login ()
 			else
 			{
 				$found_username = $user['alias'];
-				$found_password = $user['password'];
-				if($found_password != $password) // password doesn't match
+				$found_password_hash = $user['password'];
+ 				
+ 				if(!password_verify($password, $found_password_hash)) // password doesn't match
 				{
 					$error_message = "Invalid Password.";
 					$_POST['action'] = 'login-page';					
@@ -90,7 +91,7 @@ function process_login ()
 		{
 			$error_message = 'Must enter a valid username.';
 		}
-		else if (!(preg_match('/^[a-zA-Z]{4,20}$/', $user_name) === 1))
+		else if (!(preg_match('/^[a-zA-Z0-9]{4,20}$/', $user_name) === 1))
 		{
 			$error_message = 'Alias must start with a letter and be between 4 and 20 characters.';
 		}
@@ -174,7 +175,8 @@ function process_login ()
 		$userdata['email'] = $user['email'];
 		$_SESSION['userdata'] = $userdata;
 		
-		header("Refresh:10; url=http://localhost/website_1/profile/", true, 303);  // go to other controller here. source: http://stackoverflow.com/questions/11299006/header-location-delay
+		//header("Refresh:10; url=http://localhost/website_1/profile/", true, 303);  // go to other controller here. source: http://stackoverflow.com/questions/11299006/header-location-delay
+		header("Refresh:10; url=http://citatscc.org/~stickman3/profile/", true, 303);
 					
 	}
 	
