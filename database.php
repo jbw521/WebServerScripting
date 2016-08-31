@@ -57,8 +57,8 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
     
     function add_user($username, $password, $fname, $lname, $email){
         global $db;
-        $query = 'insert into user (alias, password, fname, lname, email)'
-                . ' values (:username_placeholder, :password_placeholder, :firstname_placeholder, :lastname_placeholder, :email_placeholder)';
+        $query = 'insert into user (alias, password, fname, lname, email, registerDate)'
+                . ' values (:username_placeholder, :password_placeholder, :firstname_placeholder, :lastname_placeholder, :email_placeholder, NOW())';
                                           
             //prepare the query, bind the values, then you execute
                 $statement = $db->prepare($query);
@@ -117,9 +117,55 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
                 
                 return $didit;
     }
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+	
+	function get_all_users_sidebar()
+	{
+		global $db;
+		$query = 'SELECT alias, fname, lname FROM user';
+		
+		$statement = $db->prepare($query);
+		$statment->execute();
+		$users = $statement->fetchAll();
+		$statement->closeCursor();
+		
+		return $users;		
+	}
+	
+	function get_newest_users()
+	{
+		global $db;
+		$query = 'SELECT alias, fname, lname
+					FROM user
+					ORDER BY registerDate DESC 
+					LIMIT 2;';
+					
+		$statement = $db->prepare($query);
+		$statment->execute();
+		$users = $statement->fetchAll();
+		$statement->closeCursor();
+		
+		return $users;	
+	}
+	
+	function get_users_most_comments()
+	{
+		global $db;
+		$query = 'SELECT u.alias, fname, lname, COUNT(*) as \'numComments\'
+					FROM user as u 
+					JOIN comment as c ON u.alias = c.alias
+					GROUP BY u.alias
+					LIMIT 5;';
+					
+		$statement = $db->prepare($query);
+		$statment->execute();
+		$users = $statement->fetchAll();
+		$statement->closeCursor();
+		
+		return $users;	
+	}
+	
+	
+	
+	
+	
+	?>
