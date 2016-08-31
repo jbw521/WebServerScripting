@@ -86,10 +86,13 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
             //prepare the query, bind the values, then you execute
                 $statement = $db->prepare($query);
                
+			    $options = [ 'cost' => 13 ];
+				$password_hashed = password_hash($password, PASSWORD_DEFAULT, $options);
+				
                 $statement->bindValue(':username_placeholder', $username);
                 $statement->bindValue(':firstname_placeholder', $fname);
                 $statement->bindValue(':lastname_placeholder', $lname);
-                $statement->bindValue(':password_placeholder', $password);
+                $statement->bindValue(':password_placeholder', $password_hashed);
                 $statement->bindValue(':email_placeholder', $email);
                 $statement->bindValue(':profilepic_placeholder', $profilepic);
                                
