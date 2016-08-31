@@ -1,5 +1,5 @@
 <?php
-	include_once("../database.php");
+	require_once("../database.php");
 	include_once('./update_post.php');
 	session_start();
 	
@@ -24,7 +24,7 @@
 	{
 		case 'logout':
 			session_destroy();
-			header("Location: /");
+			header("Location: /~stickman3/");
 			break;
 		case 'feed':
 			include('./feed_view.php');

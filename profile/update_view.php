@@ -1,7 +1,7 @@
 <?php include('../bin/logged_top.php'); ?>
 			<div id='loginForm'>
-            <form action='index.php?action=update_profile' method='post'>
-				<label>Update Info For: <strong></strong><?php echo $_SESSION['userdata']['alias']; ?></strong></label></br>
+            <form action='index.php?action=update_profile' method='post' enctype='multipart/form-data'>
+				<label>Update Info For: <?php echo $_SESSION['userdata']['alias']; ?></label>
 				<?php if( !empty($error_message)) { ?>
                     <p class="error"><?php echo $error_message ?></p><br>
                 <?php } ?>
@@ -21,7 +21,7 @@
 				<label>Confirm Password:</label>
                 <input type='password' name='confirmpassword'><br>
 				<label>Profile Picture:</label>
-				<input type="file" name="img" accept="image/*"></br>
+				<input type="file" name="profileimg" id="profileimg" accept="image/*"></br>
             </div>
 			<input type="hidden" name="action" value="update_profile" />
             <div id='buttons'>
