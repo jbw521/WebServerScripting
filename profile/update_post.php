@@ -111,15 +111,17 @@ function check_image()
 		}
 
 		if(empty($errors)==true){
+			$file_name = uniqid().".".$file_ext;
 			move_uploaded_file($file_tmp,"../img/user/".$file_name);
+			if($_SESSION['userdata']['profilepic'] != "user_blank.jpg")
+			{
+				unlink("../img/user/".$_SESSION['userdata']['profilepic']);
+			}
 			return $file_name;
 		}else{
 			print_r($errors);
-			return "user_blank.jpg";
 		}
 	}
-	else{
-		return "user_blank.jpg";
-	}
+	return "user_blank.jpg";
 }
 ?>
