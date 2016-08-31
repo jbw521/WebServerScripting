@@ -91,7 +91,7 @@ function process_login ()
 		{
 			$error_message = 'Must enter a valid username.';
 		}
-		else if (!(preg_match('/^[a-zA-Z0-9]{4,20}$/', $user_name) === 1))
+		else if (!(preg_match('/^[a-zA-Z]{4,20}$/', $user_name) === 1))
 		{
 			$error_message = 'Alias must start with a letter and be between 4 and 20 characters.';
 		}
