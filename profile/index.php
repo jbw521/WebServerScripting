@@ -28,16 +28,18 @@
 			break;
 		case 'changeUserListType':
 			$userListType = filter_input(INPUT_POST, 'userListType');
+			$users_sidebar = array();
 			switch($userListType)
 			{
-				case 'all':
-					$users_sidebar = get_all_users_sidebar();
-					break;
 				case 'newest':
 					$users_sidebar = get_newest_users();
 					break;
 				case 'mostComments':
 					$users_sidebar = get_users_most_comments();
+					break;
+				case 'all':
+				default:
+					$users_sidebar = get_all_users_sidebar();
 					break;
 			}
 			include('./feed_view.php');
@@ -60,6 +62,27 @@
 			break;
 		case 'profile':
 		default:
+			$profile_pic = $f_name = $l_name = 'error';
+			$aliasCheck = htmlspecialchars(FILTER_INPUT(INPUT_GET, 'alias'));
+			
+			if($aliasCheck === $_SESSION['userdata']['alias'] || $aliasCheck == "")
+			{
+				$profile_pic = $_SESSION['userdata']['profilepic'];
+				$f_name = $_SESSION['userdata']['fname'];
+				$l_name = $_SESSION['userdata']['lname'];
+			}
+			else
+			{
+				$user_data = get_username($aliasCheck);
+				if(empty($user_data))
+				{
+					include('../fuck.php');
+					break;
+				}
+				$profile_pic = $user_data['profilepic'];
+				$f_name = $user_data['fname'];
+				$l_name = $user_data['lname'];
+			}
 			include('./profile_view.php');
 			break;
 	}
