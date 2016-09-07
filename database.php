@@ -163,8 +163,64 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
 		
 		return $users;	
 	}
-	
-	
+        
+        function add_comment($alias, $comment){
+        global $db;
+        $query = 'insert into comment (alias, postid, comment)'
+                . ' values (:username_placeholder, null, :caption_placeholder)';
+                                          
+            //prepare the query, bind the values, then you execute
+                $statement = $db->prepare($query);
+               
+                $statement->bindValue(':username_placeholder', $alias);
+                $statement->bindValue(':comment_placeholder', $comment);
+                               
+                $didit = $statement->execute();
+                
+                return $didit;
+        }
+        
+        function get_post($username){
+        global $db;
+        $query = 'Select postid, imagepath, caption from post where alias=:username_placeholder';
+                                          
+            //prepare the query, bind the values, then you execute
+                $statement = $db->prepare($query);
+               
+                $statement->bindValue(':username_placeholder', $username);
+                               
+                $didit = $statement->execute();
+                $results = $statement->fetch();
+                
+                if (!$didit){
+                   return $didit;
+                }
+                else
+                {
+                    return $results;
+                }
+        }
+        
+        function get_comment($username){
+        global $db;
+        $query = 'Select comment from comment where alias=:username_placeholder';
+                                          
+            //prepare the query, bind the values, then you execute
+                $statement = $db->prepare($query);
+               
+                $statement->bindValue(':username_placeholder', $username);
+                               
+                $didit = $statement->execute();
+                $results = $statement->fetch();
+                
+                if (!$didit){
+                   return $didit;
+                }
+                else
+                {
+                    return $results;
+                }
+        }
 	
 	
 	
