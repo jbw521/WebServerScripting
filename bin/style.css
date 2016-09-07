@@ -76,3 +76,22 @@ footer {
     color: red;
     font-size: 14px;
 }
+
+#rightColumnUsers {
+	float: right;
+	width: 10em;
+	margin-left: 0px;
+}
+
+#rightColumnUsers table{
+	font-size: .8em;
+	width: 200px;
+	table-layout: fixed;
+	word-wrap: break-word;
+	border-collapse: collapse;
+}
+
+#rightColumnUsers table td {
+	border-bottom: 2px solid #3B5998;
+	
+}
