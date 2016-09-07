@@ -124,7 +124,7 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
 		$query = 'SELECT alias, fname, lname FROM user';
 		
 		$statement = $db->prepare($query);
-		$statment->execute();
+		$statement->execute();
 		$users = $statement->fetchAll();
 		$statement->closeCursor();
 		
@@ -140,7 +140,7 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
 					LIMIT 2;';
 					
 		$statement = $db->prepare($query);
-		$statment->execute();
+		$statement->execute();
 		$users = $statement->fetchAll();
 		$statement->closeCursor();
 		
@@ -157,7 +157,7 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
 					LIMIT 5;';
 					
 		$statement = $db->prepare($query);
-		$statment->execute();
+		$statement->execute();
 		$users = $statement->fetchAll();
 		$statement->closeCursor();
 		
