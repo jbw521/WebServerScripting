@@ -1,9 +1,9 @@
 <?php
 $dsn = 'mysql:host=localhost;dbname=stickman3db';
-    $username = 'root';
-    $password = '';  // be sure to change this info based on where you're running the website
-    // $username = 'stickman3';
-    // $password = 'limenewprocessingbigharmfuloctave';
+    //$username = 'root';
+    //$password = '';  // be sure to change this info based on where you're running the website
+    $username = 'stickman3';
+    $password = 'limenewprocessingbigharmfuloctave';
 	try {
         $db= new PDO($dsn, $username, $password);
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -124,7 +124,7 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
 		$query = 'SELECT alias, fname, lname FROM user';
 		
 		$statement = $db->prepare($query);
-		$statement->execute();
+		$statment->execute();
 		$users = $statement->fetchAll();
 		$statement->closeCursor();
 		
@@ -140,7 +140,7 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
 					LIMIT 2;';
 					
 		$statement = $db->prepare($query);
-		$statement->execute();
+		$statment->execute();
 		$users = $statement->fetchAll();
 		$statement->closeCursor();
 		
@@ -157,14 +157,70 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
 					LIMIT 5;';
 					
 		$statement = $db->prepare($query);
-		$statement->execute();
+		$statment->execute();
 		$users = $statement->fetchAll();
 		$statement->closeCursor();
 		
 		return $users;	
 	}
-	
-	
+        
+        function add_comment($alias, $comment){
+        global $db;
+        $query = 'insert into comment (alias, postid, comment)'
+                . ' values (:username_placeholder, null, :caption_placeholder)';
+                                          
+            //prepare the query, bind the values, then you execute
+                $statement = $db->prepare($query);
+               
+                $statement->bindValue(':username_placeholder', $alias);
+                $statement->bindValue(':comment_placeholder', $comment);
+                               
+                $didit = $statement->execute();
+                
+                return $didit;
+        }
+        
+        function get_post($username){
+        global $db;
+        $query = 'Select postid, imagepath, caption from post where alias=:username_placeholder';
+                                          
+            //prepare the query, bind the values, then you execute
+                $statement = $db->prepare($query);
+               
+                $statement->bindValue(':username_placeholder', $username);
+                               
+                $didit = $statement->execute();
+                $results = $statement->fetch();
+                
+                if (!$didit){
+                   return $didit;
+                }
+                else
+                {
+                    return $results;
+                }
+        }
+        
+        function get_comment($username){
+        global $db;
+        $query = 'Select comment from comment where alias=:username_placeholder';
+                                          
+            //prepare the query, bind the values, then you execute
+                $statement = $db->prepare($query);
+               
+                $statement->bindValue(':username_placeholder', $username);
+                               
+                $didit = $statement->execute();
+                $results = $statement->fetch();
+                
+                if (!$didit){
+                   return $didit;
+                }
+                else
+                {
+                    return $results;
+                }
+        }
 	
 	
 	
