@@ -1,9 +1,9 @@
 <?php
 $dsn = 'mysql:host=localhost;dbname=stickman3db';
-    $username = 'root';
-    $password = '';  // be sure to change this info based on where you're running the website
-    // $username = 'stickman3';
-    // $password = 'limenewprocessingbigharmfuloctave';
+    //$username = 'root';
+    //$password = '';  // be sure to change this info based on where you're running the website
+    $username = 'stickman3';
+    $password = 'limenewprocessingbigharmfuloctave';
 	try {
         $db= new PDO($dsn, $username, $password);
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -121,10 +121,10 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
 	function get_all_users_sidebar()
 	{
 		global $db;
-		$query = 'SELECT alias, fname, lname FROM user LIMIT 10';
+		$query = 'SELECT alias, fname, lname FROM user';
 		
 		$statement = $db->prepare($query);
-		$statement->execute();
+		$statment->execute();
 		$users = $statement->fetchAll();
 		$statement->closeCursor();
 		
@@ -137,10 +137,10 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
 		$query = 'SELECT alias, fname, lname
 					FROM user
 					ORDER BY registerDate DESC 
-					LIMIT 5;';
+					LIMIT 2;';
 					
 		$statement = $db->prepare($query);
-		$statement->execute();
+		$statment->execute();
 		$users = $statement->fetchAll();
 		$statement->closeCursor();
 		
@@ -157,14 +157,14 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
 					LIMIT 5;';
 					
 		$statement = $db->prepare($query);
-		$statement->execute();
+		$statment->execute();
 		$users = $statement->fetchAll();
 		$statement->closeCursor();
 		
 		return $users;	
 	}
-	
-	function add_comment($alias, $comment){
+        
+        function add_comment($alias, $comment){
         global $db;
         $query = 'insert into comment (alias, postid, comment)'
                 . ' values (:username_placeholder, null, :caption_placeholder)';
@@ -222,6 +222,27 @@ $dsn = 'mysql:host=localhost;dbname=stickman3db';
                 }
         }
 	
+        
+        function get_specific_post($username){
+        global $db;
+        $query = 'Select * from post where alias=:username_placeholder OR at=:username_placeholder';
+                                          
+            //prepare the query, bind the values, then you execute
+                $statement = $db->prepare($query);
+               
+                $statement->bindValue(':username_placeholder', $username);
+                               
+                $didit = $statement->execute();
+                $results = $statement->fetch();
+                
+                if (!$didit){
+                   return $didit;
+                }
+                else
+                {
+                    return $results;
+                }
+        }
 	
 	
 	?>
